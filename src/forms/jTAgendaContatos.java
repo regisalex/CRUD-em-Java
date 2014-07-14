@@ -9,8 +9,6 @@ package forms;
 import dao.ContatoDao;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -325,15 +323,14 @@ public class jTAgendaContatos extends javax.swing.JFrame {
     
     private void jBSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarActionPerformed
        
-        if(validaCampos() == false){
+        if(validaCampos() == true){
             cadastrarContato();
             pesquisarContatos();
             limparCampos();
 
         }
         
-       
-        
+    
     }//GEN-LAST:event_jBSalvarActionPerformed
     
     //Método para cadastrar contato
@@ -369,14 +366,14 @@ public class jTAgendaContatos extends javax.swing.JFrame {
         if(jTNome.getText().isEmpty() | jTEndereco.getText().isEmpty() | jTEmail.getText().isEmpty() | 
            jTFone.getText().isEmpty()){
            JOptionPane.showMessageDialog(null, "Obrigatório preencher todos os campos.");
-            return true;
+            return false;
         }
-        if(jTSexo.getText().contains("m,h")){
+        if(!"h,m".contains(jTSexo.getText())){
             JOptionPane.showMessageDialog(null, "Obrigatório escolher H ou M");
-            return true;
+            return false;
         }
         
-        return false;
+        return true;
     }
     
     
@@ -432,12 +429,12 @@ public class jTAgendaContatos extends javax.swing.JFrame {
     //Método para excluir contato
     private void excluirContato(){
         try {
-            if(validaCampos() == false){
-                ContatoDao fazerOque = new ContatoDao();
-                fazerOque.removerCotato(contatos.get(jTTabela.getSelectedRow()));
-                JOptionPane.showMessageDialog(null, "Contato removido com sucesso.");
-                pesquisarContatos();
-            }
+            
+            ContatoDao fazerOque = new ContatoDao();
+            fazerOque.removerCotato(contatos.get(jTTabela.getSelectedRow()));
+            JOptionPane.showMessageDialog(null, "Contato removido com sucesso.");
+            pesquisarContatos();
+            
         
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Problemas no método remover." + ex);
