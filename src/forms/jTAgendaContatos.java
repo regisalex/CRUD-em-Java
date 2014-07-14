@@ -9,6 +9,7 @@ package forms;
 import dao.ContatoDao;
 import java.sql.SQLException;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -192,6 +193,11 @@ public class jTAgendaContatos extends javax.swing.JFrame {
         });
 
         jBSair.setText("Sair");
+        jBSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSairActionPerformed(evt);
+            }
+        });
 
         jBAlterar.setText("Alterar");
         jBAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -425,6 +431,10 @@ public class jTAgendaContatos extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jBExcluirActionPerformed
+
+    private void jBSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jBSairActionPerformed
     
     //Método para excluir contato
     private void excluirContato(){
